@@ -1,6 +1,6 @@
 ## IT-Logger
 
-#### This is a simple tutorial for learning `Redux`.[React Front to Back, Udemy, Traversy Media](https://www.udemy.com/course/modern-react-front-to-back/)
+#### This is a simple tutorial for learning `Redux`. [React Front to Back, Udemy, Traversy Media](https://www.udemy.com/course/modern-react-front-to-back/)
 ---
 * React app to track IT department tasks and issues.
 * This is built using `json-server` which is a mock `Backend` which provides exactly the same fuctionality as a `express server`.
