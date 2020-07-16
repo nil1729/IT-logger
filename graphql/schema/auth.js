@@ -3,7 +3,6 @@ module.exports = {
         type User {
             email: String!
             name: String!
-            password: String
         }
         type AuthData {
             token: String!
@@ -12,7 +11,7 @@ module.exports = {
         input UserInput {
             email: String!
             name: String
-            password: String!
+            password: String
         }
     `,
     authMutations: `
