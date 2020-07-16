@@ -1,49 +1,36 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.2",
-    "materialize-css": "^1.0.0",
-    "moment": "^2.26.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-moment": "^0.9.7",
-    "react-redux": "^7.2.0",
-    "react-scripts": "3.4.1",
-    "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "json-server": "json-server --watch db.json --port 5000",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "dev": "concurrently \"npm start\" \"npm run json-server\""
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "concurrently": "^5.2.0",
-    "json-server": "^0.16.1"
-  },
-  "proxy": "http://localhost:5000"
+	"name": "IT-logger",
+	"version": "1.0.0",
+	"description": "",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js",
+		"server": "nodemon server",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nil1729/IT-logger.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/nil1729/IT-logger/issues"
+	},
+	"homepage": "https://github.com/nil1729/IT-logger#readme",
+	"dependencies": {
+		"bcrypt": "^5.0.0",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"express-graphql": "^0.11.0",
+		"graphql": "^15.3.0",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^5.9.24"
+	},
+	"devDependencies": {
+		"concurrently": "^5.2.0",
+		"cors": "^2.8.5",
+		"nodemon": "^2.0.4"
+	}
 }
