@@ -2,11 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux';
 const Techs = ({ techs }) => {
     return (
-        <div id="techsModal" class="modal">
-            <div class="modal-content">
+        <div id="techsModal" className="modal">
+            <div className="modal-content">
                 <h4 className="center">Technicians</h4>
                 <hr />
-                <ul class="collection">
+                <ul className="collection">
                     {
                         techs && techs.map(tech => (
                             <li key={tech._id} className="collection-item">
@@ -17,7 +17,7 @@ const Techs = ({ techs }) => {
                     }
                 </ul>
             </div>
-            <div class="modal-footer">
+            <div className="modal-footer">
                 <button className="modal-close waves-effect waves-green btn-small brown">Close
                     <i className="material-icons right">close</i>
                 </button>

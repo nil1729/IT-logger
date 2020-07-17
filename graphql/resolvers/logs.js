@@ -64,9 +64,14 @@ module.exports = {
     },
     deleteLog: async (args, req) => {
         try {
-
+            if (!req.isAuth) {
+                throw ('Unauthorized Request');
+            }
+            let log = await Log.findByIdAndDelete(args.id);
+            return log;
         } catch (e) {
-
+            console.log(e);
+            throw new Error(e);
         }
     }
 }

@@ -22,9 +22,11 @@ const Home = ({ getTechs, getLogs, log }) => {
                     <li className="collection-header center"><h4>System Logs</h4></li>
                     {
                         loading ? (<AppLoader />) : (
-                            logs.map(log => (
+                            logs.length === 0 ? (<>
+                                <p className="flow-text center grey-text">No Logs to Show</p>
+                            </>) : (logs.map(log => (
                                 <ListItem key={log._id} log={log} />
-                            ))
+                            )))
                         )
                     }
                 </ul>

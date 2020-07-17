@@ -2,7 +2,8 @@ import {
     GET_TECHS,
     LOG_ERROR,
     ADD_LOG,
-    GET_LOGS
+    GET_LOGS,
+    DELETE_LOG
 } from './types';
 
 const sendRequset = async (body) => {
@@ -142,6 +143,40 @@ export const createLog = (logInput) => async dispatch => {
             return dispatch({
                 type: ADD_LOG,
                 payload: res.data.createLog
+            });
+        }
+    } catch (e) {
+        console.log(e);
+        return dispatch({
+            type: LOG_ERROR,
+            payload: 'Sorry! Server Error occurred'
+        })
+    }
+};
+
+export const deleteLog = (id) => async dispatch => {
+    try {
+        const query = JSON.stringify({
+            query: `
+            mutation {
+                deleteLog(id: "${id}") {
+                  _id
+                }
+              }
+            `
+        });
+        const res = await sendRequset(query);
+        if (res.errors) {
+            console.log(res.errors);
+            return dispatch({
+                type: LOG_ERROR,
+                payload: res.errors[0].message
+            })
+        }
+        if (res.data) {
+            return dispatch({
+                type: DELETE_LOG,
+                payload: res.data.deleteLog
             });
         }
     } catch (e) {

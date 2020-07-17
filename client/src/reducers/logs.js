@@ -2,7 +2,8 @@ import {
     GET_TECHS,
     LOG_ERROR,
     ADD_LOG,
-    GET_LOGS
+    GET_LOGS,
+    DELETE_LOG
 } from '../actions/types';
 
 const initialState = {
@@ -29,6 +30,11 @@ export default (state = initialState, action) => {
                 ...state,
                 logs: action.payload,
                     loading: false
+            };
+        case DELETE_LOG:
+            return {
+                ...state,
+                logs: state.logs.filter(log => log._id !== action.payload._id)
             };
         default:
             return state;

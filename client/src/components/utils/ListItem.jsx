@@ -1,7 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux';
+import { deleteLog } from '../../actions/logs';
+import M from 'materialize-css/dist/js/materialize.js';
 
-const ListItem = ({ log }) => {
+const ListItem = ({ log, deleteLog }) => {
     const d = new Date(parseInt(log.updatedAt)).toDateString();
+    const deleteHandle = async e => {
+        e.preventDefault();
+        await deleteLog(log._id);
+        M.toast({ html: 'Log Deleted Successfully' });
+    }
     return (
         <>
             <li className="collection-item">
@@ -11,7 +19,7 @@ const ListItem = ({ log }) => {
                     <span>Last updated by {log.tech.name}</span>
                     <br />
                     <span className="grey-text">At {d}</span>
-                    <a style={deleteBtnStyles()} href="#!" className="secondary-content grey-text">
+                    <a onClick={deleteHandle} style={deleteBtnStyles()} href="#!" className="secondary-content grey-text">
                         <i className="material-icons">delete</i>
                     </a>
                 </div>
@@ -28,4 +36,4 @@ const deleteBtnStyles = () => {
         top: '50%'
     }
 }
-export default ListItem
+export default connect(null, { deleteLog })(ListItem)
