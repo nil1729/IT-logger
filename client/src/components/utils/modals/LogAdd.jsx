@@ -86,7 +86,7 @@ const LogAdd = ({ techs, createLog }) => {
                     </div>
                 </form>
                 <div className="modal-footer">
-                    <button className="modal-close waves-effect waves-green btn brown">Close
+                    <button className="modal-close waves-effect waves-green btn-small brown">Close
                     <i className="material-icons right">close</i>
                     </button>
                 </div>

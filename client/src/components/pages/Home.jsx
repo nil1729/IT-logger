@@ -3,6 +3,7 @@ import AppLoader from '../utils/Loader';
 import FloatButtons from '../utils/FloatButtons';
 import LogAdd from '../utils/modals/LogAdd';
 import ListItem from '../utils/ListItem';
+import Techs from '../utils/modals/TechsModal';
 
 import { connect } from 'react-redux';
 import { getTechs, getLogs } from '../../actions/logs';
@@ -29,6 +30,7 @@ const Home = ({ getTechs, getLogs, log }) => {
                 </ul>
                 <FloatButtons />
                 <LogAdd />
+                <Techs />
             </div>
         </>
     )
