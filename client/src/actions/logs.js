@@ -3,7 +3,10 @@ import {
     LOG_ERROR,
     ADD_LOG,
     GET_LOGS,
-    DELETE_LOG
+    DELETE_LOG,
+    SET_CURRENT,
+    CLEAR_CURRENT,
+    UPDATE_LOG
 } from './types';
 
 const sendRequset = async (body) => {
@@ -154,6 +157,48 @@ export const createLog = (logInput) => async dispatch => {
     }
 };
 
+export const updateLog = (logInput, id) => async dispatch => {
+    try {
+        const query = JSON.stringify({
+            query: `
+            mutation {
+                updateLog (logInput: {message: "${logInput.message}", attention: ${logInput.attention}, tech: "${logInput.tech}" }, id: "${id}") {
+                  _id
+                  message
+                  attention
+                  updatedAt
+                  tech {
+                    email
+                    name
+                    _id
+                  }
+                }
+              }
+            `
+        })
+        const res = await sendRequset(query);
+        if (res.errors) {
+            console.log(res.errors);
+            return dispatch({
+                type: LOG_ERROR,
+                payload: res.errors[0].message
+            })
+        }
+        if (res.data) {
+            return dispatch({
+                type: UPDATE_LOG,
+                payload: res.data.updateLog
+            });
+        }
+    } catch (e) {
+        console.log(e);
+        return dispatch({
+            type: LOG_ERROR,
+            payload: 'Sorry! Server Error occurred'
+        })
+    }
+};
+
 export const deleteLog = (id) => async dispatch => {
     try {
         const query = JSON.stringify({
@@ -185,5 +230,16 @@ export const deleteLog = (id) => async dispatch => {
             type: LOG_ERROR,
             payload: 'Sorry! Server Error occurred'
         })
+    }
+}
+export const setCurrent = id => {
+    return {
+        type: SET_CURRENT,
+        payload: id
+    }
+}
+export const clearCurrent = () => {
+    return {
+        type: CLEAR_CURRENT
     }
 }

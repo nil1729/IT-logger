@@ -57,9 +57,28 @@ module.exports = {
     },
     updateLog: async (args, req) => {
         try {
-
+            if (!req.isAuth) {
+                throw ('Unauthorized Request');
+            }
+            const {
+                message,
+                attention,
+                tech,
+            } = args.logInput;
+            let log = await Log.updateOne({
+                _id: args.id
+            }, {
+                message,
+                attention,
+                tech,
+            });
+            const logs = await Log.find().populate('tech').sort({
+                updatedAt: -1
+            });
+            return logs;
         } catch (e) {
-
+            console.log(e);
+            throw new Error(e);
         }
     },
     deleteLog: async (args, req) => {

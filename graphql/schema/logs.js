@@ -15,7 +15,7 @@ module.exports = {
     `,
     logMutations: `
         createLog(logInput:LogInput!) : Log!
-        updateLog(logInput:LogInput, id: String!): Log!
+        updateLog(logInput:LogInput, id: String!): [Log!]!
         deleteLog(id: String!): Log
     `,
     logQuery: `

@@ -28,3 +28,15 @@ blockquote {
   font-size: 1.15rem;
   color: black;
 }
+
+.collection-item div {
+  position: relative !important;
+}
+
+.secondary-content {
+  position: absolute;
+  right: 0;
+  transform: translateY(-50%);
+  top: 50%;
+  cursor: pointer;
+}

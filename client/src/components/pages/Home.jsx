@@ -42,4 +42,4 @@ const mapStateToProps = state => ({
     log: state.logs
 })
 
-export default connect(mapStateToProps, { getTechs, getLogs })(Home);
+export default connect(mapStateToProps, { getTechs, getLogs, })(Home);

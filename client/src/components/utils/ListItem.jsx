@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { deleteLog } from '../../actions/logs';
+import { deleteLog, setCurrent } from '../../actions/logs';
 import M from 'materialize-css/dist/js/materialize.js';
 
-const ListItem = ({ log, deleteLog }) => {
+const ListItem = ({ log, deleteLog, setCurrent }) => {
     const d = new Date(parseInt(log.updatedAt)).toDateString();
     const deleteHandle = async e => {
         e.preventDefault();
@@ -14,26 +14,19 @@ const ListItem = ({ log, deleteLog }) => {
         <>
             <li className="collection-item">
                 <div style={{ position: 'relative' }}>
-                    <a href="!#" className={`${log.attention ? 'red' : 'blue'}-text`} style={{ fontSize: '1.1rem' }}>{log.message}</a>
+                    <a href="#addLogModal" onClick={(e) => { e.preventDefault(); setCurrent(log._id) }} className={`${log.attention ? 'red' : 'blue'}-text`} style={{ fontSize: '1.1rem' }}>{log.message}</a>
                     <br />
                     <span>Last updated by {log.tech.name}</span>
                     <br />
                     <span className="grey-text">At {d}</span>
-                    <a onClick={deleteHandle} style={deleteBtnStyles()} href="#!" className="secondary-content grey-text">
+                    <span onClick={deleteHandle} className="secondary-content grey-text">
                         <i className="material-icons">delete</i>
-                    </a>
+                    </span>
                 </div>
             </li>
         </>
     )
 }
 
-const deleteBtnStyles = () => {
-    return {
-        position: 'absolute',
-        right: 0,
-        transform: 'translateY(-50%)',
-        top: '50%'
-    }
-}
-export default connect(null, { deleteLog })(ListItem)
+
+export default connect(null, { deleteLog, setCurrent })(ListItem)

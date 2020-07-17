@@ -1,6 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux';
+import { clearCurrent } from '../../actions/logs';
 
-const FloatButton = () => {
+const FloatButton = ({ clearCurrent }) => {
     return (
         <>
             <div className="fixed-action-btn">
@@ -16,4 +18,4 @@ const FloatButton = () => {
     )
 }
 
-export default FloatButton
+export default connect(null, { clearCurrent })(FloatButton);

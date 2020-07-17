@@ -10,8 +10,13 @@ const Techs = ({ techs }) => {
                     {
                         techs && techs.map(tech => (
                             <li key={tech._id} className="collection-item">
-                                <blockquote>{tech.name}</blockquote>
-                                <blockquote>{tech.email}</blockquote>
+                                <div>
+                                    <blockquote>{tech.name}</blockquote>
+                                    <blockquote>{tech.email}</blockquote>
+                                    <span className="secondary-content grey-text">
+                                        <i className="material-icons">delete</i>
+                                    </span>
+                                </div>
                             </li>
                         ))
                     }
