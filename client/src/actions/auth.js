@@ -145,3 +145,9 @@ export const loadUser = () => async dispatch => {
         })
     }
 }
+export const logout = () => {
+    return {
+        type: LOGOUT,
+        payload: 'Successfully Logged out'
+    }
+}

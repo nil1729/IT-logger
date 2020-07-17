@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { clearCurrent } from '../../actions/logs';
+import { logout } from '../../actions/auth';
 
-const FloatButton = ({ clearCurrent }) => {
+const FloatButton = ({ logout }) => {
     return (
         <>
             <div className="fixed-action-btn">
@@ -10,7 +10,7 @@ const FloatButton = ({ clearCurrent }) => {
                     <i className="large material-icons">add</i>
                 </a>
                 <ul>
-                    <li><a className="btn-floating indigo waves-effect waves-light modal-trigger"><i className="material-icons">person_add</i></a></li>
+                    <li><a href="!#" onClick={(e) => { e.preventDefault(); logout() }} className="btn-floating indigo waves-effect waves-light"><i className="material-icons">fingerprint</i></a></li>
                     <li><a href="#techsModal" className="btn-floating light-green darken-1 waves-effect waves-light modal-trigger"><i className="material-icons">person</i></a></li>
                 </ul>
             </div>
@@ -18,4 +18,4 @@ const FloatButton = ({ clearCurrent }) => {
     )
 }
 
-export default connect(null, { clearCurrent })(FloatButton);
+export default connect(null, { logout })(FloatButton);

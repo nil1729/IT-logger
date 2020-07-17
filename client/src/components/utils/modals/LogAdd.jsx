@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import M from 'materialize-css/dist/js/materialize.js';
 import { connect } from 'react-redux';
-import AppLoader from '../Loader';
 import { createLog, clearCurrent, updateLog } from '../../../actions/logs';
 
 const LogAdd = ({ techs, createLog, current, clearCurrent, updateLog }) => {
