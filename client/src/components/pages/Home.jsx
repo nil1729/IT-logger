@@ -4,6 +4,7 @@ import FloatButtons from '../utils/FloatButtons';
 import LogAdd from '../utils/modals/LogAdd';
 import ListItem from '../utils/ListItem';
 import Techs from '../utils/modals/TechsModal';
+import LogEdit from '../utils/modals/LogEdit';
 
 import { connect } from 'react-redux';
 import { getTechs, getLogs } from '../../actions/logs';
@@ -14,7 +15,7 @@ const Home = ({ getTechs, getLogs, log }) => {
         getLogs();
         // eslint-disable-next-line
     }, []);
-    const { logs, loading } = log;
+    const { logs, loading, filtered } = log;
     return (
         <>
             <div className="container">
@@ -24,15 +25,18 @@ const Home = ({ getTechs, getLogs, log }) => {
                         loading ? (<AppLoader />) : (
                             logs.length === 0 ? (<>
                                 <p className="flow-text center grey-text">No Logs to Show</p>
-                            </>) : (logs.map(log => (
+                            </>) : (filtered ? (filtered.map(log => (
                                 <ListItem key={log._id} log={log} />
-                            )))
+                            ))) : (logs.map(log => (
+                                <ListItem key={log._id} log={log} />
+                            ))))
                         )
                     }
                 </ul>
                 <FloatButtons />
                 <LogAdd />
                 <Techs />
+                <LogEdit />
             </div>
         </>
     )

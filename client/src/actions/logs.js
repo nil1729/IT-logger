@@ -6,7 +6,9 @@ import {
     DELETE_LOG,
     SET_CURRENT,
     CLEAR_CURRENT,
-    UPDATE_LOG
+    UPDATE_LOG,
+    FILTER_LIST,
+    CLEAR_FILTERS
 } from './types';
 
 const sendRequset = async (body) => {
@@ -241,5 +243,16 @@ export const setCurrent = id => {
 export const clearCurrent = () => {
     return {
         type: CLEAR_CURRENT
+    }
+}
+export const filterList = (text) => {
+    if (text === '') {
+        return {
+            type: CLEAR_FILTERS
+        }
+    }
+    return {
+        type: FILTER_LIST,
+        payload: text
     }
 }

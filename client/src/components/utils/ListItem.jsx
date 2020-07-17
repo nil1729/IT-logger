@@ -14,7 +14,7 @@ const ListItem = ({ log, deleteLog, setCurrent }) => {
         <>
             <li className="collection-item">
                 <div style={{ position: 'relative' }}>
-                    <a href="#addLogModal" onClick={(e) => { e.preventDefault(); setCurrent(log._id) }} className={`${log.attention ? 'red' : 'blue'}-text`} style={{ fontSize: '1.1rem' }}>{log.message}</a>
+                    <a href="#editLogModal" onClick={() => { setCurrent(log._id) }} className={`${log.attention ? 'red' : 'blue'}-text modal-trigger`} style={{ fontSize: '1.1rem' }}>{log.message}</a>
                     <br />
                     <span>Last updated by {log.tech.name}</span>
                     <br />

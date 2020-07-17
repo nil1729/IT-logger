@@ -13,9 +13,9 @@ const Techs = ({ techs }) => {
                                 <div>
                                     <blockquote>{tech.name}</blockquote>
                                     <blockquote>{tech.email}</blockquote>
-                                    <span className="secondary-content grey-text">
+                                    {/* <span className="secondary-content grey-text">
                                         <i className="material-icons">delete</i>
-                                    </span>
+                                    </span> */}
                                 </div>
                             </li>
                         ))

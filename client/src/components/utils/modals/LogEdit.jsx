@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react'
 import M from 'materialize-css/dist/js/materialize.js';
 import { connect } from 'react-redux';
-import { createLog } from '../../../actions/logs';
+import { clearCurrent, updateLog } from '../../../actions/logs';
 
-const LogAdd = ({ techs, createLog }) => {
+const LogAdd = ({ techs, current, clearCurrent, updateLog }) => {
     const nameEl = useRef();
     const techEl = useRef();
     const modalEl = useRef();
     const [attention, setAttention] = useState(false);
     const [submitted, setSubmitted] = useState(false);
-    const validateInput = (message, tech,) => {
+    const validateInput = (message, tech) => {
         if (message.trim().length === 0) {
             M.toast({ html: 'Please enter a Log Message' });
         } else if (tech === '') {
@@ -25,8 +25,17 @@ const LogAdd = ({ techs, createLog }) => {
     }
     useEffect(() => {
         M.AutoInit();
+        if (current) {
+            nameEl.current.value = current.message;
+            techEl.current.value = current.tech._id;
+            setAttention(current.attention);
+            M.AutoInit();
+            M.updateTextFields();
+            const instance = M.Modal.getInstance(modalEl.current);
+            instance.open();
+        }
         // eslint-disable-next-line
-    }, [techs]);
+    }, [techs, current]);
     const handleSubmit = async e => {
         e.preventDefault();
         const message = nameEl.current.value;
@@ -36,25 +45,26 @@ const LogAdd = ({ techs, createLog }) => {
         }
         setSubmitted(true);
         resetForm();
-        await createLog({ message, tech, attention });
-        M.toast({ html: 'Log Added Successfully' });
+        await updateLog({ message, tech, attention }, current._id);
+        M.toast({ html: 'Log Updated Successfully' });
         M.AutoInit();
+        clearCurrent();
         setSubmitted(false);
         const instance = M.Modal.getInstance(modalEl.current);
         instance.close();
     }
     return (
         <>
-            <div ref={modalEl} id="addLogModal" className="modal">
+            <div ref={modalEl} id="editLogModal" className="modal">
                 <form onSubmit={handleSubmit}>
                     <div className="modal-content" style={{ paddingBottom: 0 }}>
-                        <h4 className="center green-text">Add New Log</h4>
+                        <h4 className="center green-text">Edit Log</h4>
                         <hr />
                         <div className="row" style={{ marginBottom: 0 }}>
                             <div className="input-field col s12">
                                 <i className="material-icons prefix">account_circle</i>
                                 <input required ref={nameEl} type="text" className="validate" />
-                                <label htmlFor="icon_prefix">Log Title</label>
+                                <label className="active" htmlFor="icon_prefix">Log Title</label>
                             </div>
                             <div className="input-field col s12">
                                 <i className="material-icons prefix">account_circle</i>
@@ -85,7 +95,7 @@ const LogAdd = ({ techs, createLog }) => {
                     </div>
                 </form>
                 <div className="modal-footer">
-                    <button className="modal-close waves-effect waves-green btn-small brown">Close
+                    <button onClick={() => { clearCurrent() }} className="modal-close waves-effect waves-green btn-small brown">Close
                     <i className="material-icons right">close</i>
                     </button>
                 </div>
@@ -99,4 +109,4 @@ const mapStateToProps = state => ({
     current: state.logs.current
 })
 
-export default connect(mapStateToProps, { createLog })(LogAdd);
+export default connect(mapStateToProps, { clearCurrent, updateLog })(LogAdd);

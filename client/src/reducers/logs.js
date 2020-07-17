@@ -1,12 +1,14 @@
 import {
     GET_TECHS,
-    LOG_ERROR,
+    // LOG_ERROR,
     ADD_LOG,
     GET_LOGS,
     DELETE_LOG,
     SET_CURRENT,
     CLEAR_CURRENT,
-    UPDATE_LOG
+    UPDATE_LOG,
+    FILTER_LIST,
+    CLEAR_FILTERS
 } from '../actions/types';
 
 const initialState = {
@@ -14,7 +16,8 @@ const initialState = {
     logs: null,
     errors: null,
     loading: true,
-    current: null
+    current: null,
+    filtered: null,
 };
 
 export default (state = initialState, action) => {
@@ -54,6 +57,21 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 current: null
+            };
+        case FILTER_LIST:
+            return {
+                ...state,
+                filtered: state.logs.filter(log => {
+                    const regex = new RegExp(action.payload, 'gi');
+                    if (regex.test(log.message) || regex.test(log.tech.name)) {
+                        return log
+                    }
+                })
+            };
+        case CLEAR_FILTERS:
+            return {
+                ...state,
+                filtered: null
             };
         default:
             return state;
