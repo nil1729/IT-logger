@@ -86,5 +86,17 @@ module.exports = {
             console.log(e);
             throw new Error(e);
         }
+    },
+    deleteUser: async (args, req) => {
+        try {
+            if (!req.isAuth) {
+                throw ('Unauthorized Request');
+            }
+            let user = await User.findByIdAndDelete(args.id);
+            return user;
+        } catch (e) {
+            console.log(e);
+            throw new Error(e);
+        }
     }
 }

@@ -21,5 +21,6 @@ module.exports = {
     authMutations: `
         registerUser(userInput: UserInput!): AuthData!
         loginUser(userInput: UserInput!): AuthData!
+        deleteUser(id: ID!): User
     `
 }
