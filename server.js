@@ -13,7 +13,7 @@ const {
 const schema = require('./graphql/schema');
 const resolvers = require('./graphql/resolvers');
 const authMiddleware = require('./middleware/isAuthenticated');
-
+const path = require('path');
 
 connectDB();
 
@@ -32,6 +32,15 @@ app.use(
         graphiql: process.env.NODE_ENV === 'production' ? false : true,
     })
 );
+
+// Serve Static assests in Production
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 
 const PORT = process.env.PORT || 5000;
 
