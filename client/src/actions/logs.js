@@ -1,9 +1,8 @@
 import {
-    REGISTER_USER,
-    LOGIN_USER,
-    AUTH_ERROR,
-    LOGOUT,
-    LOAD_USER
+    GET_TECHS,
+    LOG_ERROR,
+    ADD_LOG,
+    GET_LOGS
 } from './types';
 
 const sendRequset = async (body) => {
@@ -34,113 +33,121 @@ const sendRequset = async (body) => {
         console.log(e);
     }
 }
-
-export const registerUser = (user) => async dispatch => {
-    try {
-        const query = JSON.stringify({
-            query: `
-                mutation {
-                    registerUser(userInput: {email: "${user.email}", name: "${user.name}", password: "${user.password}"}){
-                        token
-                        user {
-                            name
-                            email
-                            _id
-                        }
-                    }
-                }
-            `
-        })
-        const res = await sendRequset(query);
-        if (res.errors) {
-            return dispatch({
-                type: AUTH_ERROR,
-                payload: res.errors[0].message
-            })
-        }
-        if (res.data) {
-            return dispatch({
-                type: REGISTER_USER,
-                payload: res.data.registerUser
-            });
-        }
-    } catch (e) {
-        console.log(e);
-        return dispatch({
-            type: AUTH_ERROR,
-            payload: 'Sorry! Server Error occurred'
-        })
-    }
-}
-
-export const loginUser = (user) => async dispatch => {
-    try {
-        const query = JSON.stringify({
-            query: `
-                mutation {
-                    loginUser(userInput: {email: "${user.email}", password: "${user.password}"}){
-                        token
-                        user {
-                            name
-                            email
-                            _id
-                        }
-                    }
-                }
-            `
-        })
-        const res = await sendRequset(query);
-        if (res.errors) {
-            return dispatch({
-                type: AUTH_ERROR,
-                payload: res.errors[0].message
-            })
-        }
-        if (res.data) {
-            return dispatch({
-                type: LOGIN_USER,
-                payload: res.data.loginUser
-            });
-        }
-    } catch (e) {
-        console.log(e);
-        return dispatch({
-            type: AUTH_ERROR,
-            payload: 'Sorry! Server Error occurred'
-        })
-    }
-}
-
-export const loadUser = () => async dispatch => {
+export const getLogs = () => async dispatch => {
     try {
         const query = JSON.stringify({
             query: `
                 query {
-                    loadUser {
-                        name
-                        email
+                    logs {
                         _id
+                        message
+                        attention
+                        updatedAt
+                        tech {
+                            email
+                            name
+                            _id
+                        }
                     }
                 }
             `
-        })
+        });
         const res = await sendRequset(query);
         if (res.errors) {
+            console.log(res.errors);
             return dispatch({
-                type: AUTH_ERROR,
+                type: LOG_ERROR,
                 payload: res.errors[0].message
             })
         }
         if (res.data) {
             return dispatch({
-                type: LOAD_USER,
-                payload: res.data
+                type: GET_LOGS,
+                payload: res.data.logs
             });
         }
     } catch (e) {
         console.log(e);
         return dispatch({
-            type: AUTH_ERROR,
+            type: LOG_ERROR,
+            payload: 'Sorry! Server Error occurred'
+        })
+    }
+}
+
+export const getTechs = () => async dispatch => {
+    try {
+        const query = JSON.stringify({
+            query: `
+                query {
+                    techs {
+                        email
+                        name
+                        _id
+                    }
+                }
+            `
+        });
+        const res = await sendRequset(query);
+        if (res.errors) {
+            console.log(res.errors);
+            return dispatch({
+                type: LOG_ERROR,
+                payload: res.errors[0].message
+            })
+        }
+        if (res.data) {
+            return dispatch({
+                type: GET_TECHS,
+                payload: res.data.techs
+            });
+        }
+    } catch (e) {
+        console.log(e);
+        return dispatch({
+            type: LOG_ERROR,
+            payload: 'Sorry! Server Error occurred'
+        })
+    }
+}
+
+export const createLog = (logInput) => async dispatch => {
+    try {
+        const query = JSON.stringify({
+            query: `
+            mutation {
+                createLog (logInput: {message: "${logInput.message}", attention: ${logInput.attention}, tech: "${logInput.tech}" }) {
+                  _id
+                  message
+                  attention
+                  updatedAt
+                  tech {
+                    email
+                    name
+                    _id
+                  }
+                }
+              }
+            `
+        })
+        const res = await sendRequset(query);
+        if (res.errors) {
+            console.log(res.errors);
+            return dispatch({
+                type: LOG_ERROR,
+                payload: res.errors[0].message
+            })
+        }
+        if (res.data) {
+            return dispatch({
+                type: ADD_LOG,
+                payload: res.data.createLog
+            });
+        }
+    } catch (e) {
+        console.log(e);
+        return dispatch({
+            type: LOG_ERROR,
             payload: 'Sorry! Server Error occurred'
         })
     }

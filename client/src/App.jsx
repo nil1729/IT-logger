@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Auth from './components/auth/index';
 import NotFound from './components/pages/NotFound';
+import Home from './components/pages/Home';
+import PrivateRoute from './routes/PrivateRoute';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -25,6 +27,7 @@ const App = () => {
           <div className="container">
             <Switch>
               <Route exact path="/" component={Auth} />
+              <PrivateRoute exact path="/home" component={Home} />
               <Route component={NotFound} />
             </Switch>
           </div>

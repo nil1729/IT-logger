@@ -30,11 +30,7 @@ module.exports = {
             });
             return {
                 token,
-                user: {
-                    email,
-                    name,
-                    password: null
-                }
+                user
             }
         } catch (e) {
             console.log(e);
@@ -51,7 +47,7 @@ module.exports = {
                 email
             });
             if (!user) {
-
+                throw ('Authentication failed');
             }
             let isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) {
@@ -76,4 +72,19 @@ module.exports = {
             throw new Error(e);
         }
     },
+    loadUser: async (args, req) => {
+        try {
+            if (!req.isAuth) {
+                throw ('Your Session is Expired');
+            }
+            let user = await User.findById(req.userID);
+            if (!user) {
+                throw ('Invalid Credentials');
+            }
+            return user;
+        } catch (e) {
+            console.log(e);
+            throw new Error(e);
+        }
+    }
 }

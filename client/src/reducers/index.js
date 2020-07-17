@@ -2,6 +2,8 @@ import {
     combineReducers
 } from 'redux';
 import authReducers from './auth';
+import logsReducers from './logs';
 export default combineReducers({
-    auths: authReducers
+    auths: authReducers,
+    logs: logsReducers
 });

@@ -12,11 +12,14 @@ const {
 } = require('express-graphql');
 const schema = require('./graphql/schema');
 const resolvers = require('./graphql/resolvers');
+const authMiddleware = require('./middleware/isAuthenticated');
+
 
 connectDB();
 
+app.use(authMiddleware);
 if (process.env.NODE_ENV !== 'production') {
-    require('cors')();
+    app.use(require('cors')());
 }
 
 app.use(express.json());

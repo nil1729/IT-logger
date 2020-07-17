@@ -33,9 +33,7 @@ const Auth = ({ registerUser, auths, loginUser }) => {
         }
         else if (mode === 'register' && name.trim().length === 0) {
             M.toast({ html: 'Please Enter a Name' });
-        } else {
-            return true;
-        }
+        } else return true;
     }
 
     const resetForm = () => {
@@ -58,7 +56,7 @@ const Auth = ({ registerUser, auths, loginUser }) => {
             email,
             password,
             name
-        };
+        }
         if (mode === 'login') {
             loginUser(userInput);
         } else {

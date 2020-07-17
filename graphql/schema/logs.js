@@ -4,12 +4,13 @@ module.exports = {
             _id: String
             message: String!
             attention: Boolean!
+            updatedAt: String
             tech: User!
         }
         input LogInput {
             message: String!
             attention: Boolean!
-            tech: UserInput!
+            tech: ID!
         }
     `,
     logMutations: `
@@ -19,5 +20,6 @@ module.exports = {
     `,
     logQuery: `
         logs: [Log!]!
+        techs: [User!]!
     `
 }

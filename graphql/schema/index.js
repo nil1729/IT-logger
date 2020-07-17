@@ -3,6 +3,7 @@ const {
 } = require('graphql');
 const {
     authTypes,
+    authQuery,
     authMutations
 } = require('./auth');
 const {
@@ -14,6 +15,7 @@ module.exports = buildSchema(`
     ${authTypes}
     ${logTypes}
     type RootQuery {
+        ${authQuery}
         ${logQuery}
     }
     type RootMutation {
