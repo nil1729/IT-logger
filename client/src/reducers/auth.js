@@ -3,7 +3,8 @@ import {
     LOGIN_USER,
     AUTH_ERROR,
     LOGOUT,
-    LOAD_USER
+    LOAD_USER,
+    CLEAR_ERROR
 } from '../actions/types';
 
 const initialState = {
@@ -44,6 +45,11 @@ export default (state = initialState, action) => {
                     user: null,
                     token: null,
                     errors: action.payload
+            };
+        case CLEAR_ERROR:
+            return {
+                ...state,
+                errors: null
             };
         default:
             return state;

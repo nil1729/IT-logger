@@ -3,7 +3,8 @@ import {
     LOGIN_USER,
     AUTH_ERROR,
     LOGOUT,
-    LOAD_USER
+    LOAD_USER,
+    CLEAR_ERROR
 } from './types';
 
 const sendRequset = async (body) => {
@@ -149,5 +150,10 @@ export const logout = () => {
     return {
         type: LOGOUT,
         payload: 'Successfully Logged out'
+    }
+}
+export const clearErrors = () => {
+    return {
+        type: CLEAR_ERROR
     }
 }

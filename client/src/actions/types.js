@@ -3,6 +3,7 @@ export const LOGIN_USER = 'LOGIN_USER'
 export const LOGOUT = 'LOGOUT'
 export const AUTH_ERROR = 'AUTH_ERROR'
 export const LOAD_USER = 'LOAD_USER'
+export const CLEAR_ERROR = 'CLEAR_ERROR'
 
 
 

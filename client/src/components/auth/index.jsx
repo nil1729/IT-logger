@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { connect } from 'react-redux';
-import { registerUser, loginUser } from '../../actions/auth';
+import { registerUser, loginUser, clearErrors } from '../../actions/auth';
 import M from 'materialize-css/dist/js/materialize.js';
 import { useHistory } from 'react-router-dom';
 
-const Auth = ({ registerUser, auths, loginUser }) => {
+const Auth = ({ registerUser, auths, loginUser, clearErrors }) => {
     const [mode, setMode] = useState('login');
     const [loading, setLoading] = useState(false);
     const { isAuthenticated, errors } = auths;
@@ -13,7 +13,9 @@ const Auth = ({ registerUser, auths, loginUser }) => {
         if (errors) {
             setLoading(false);
             M.toast({ html: errors });
-        } else if (isAuthenticated) {
+            clearErrors();
+        }
+        else if (isAuthenticated) {
             history.push('/home');
         }
         // eslint-disable-next-line
@@ -110,4 +112,4 @@ const mapStateToProps = (state) => ({
     auths: state.auths
 })
 
-export default connect(mapStateToProps, { registerUser, loginUser })(Auth);
+export default connect(mapStateToProps, { registerUser, loginUser, clearErrors })(Auth);
