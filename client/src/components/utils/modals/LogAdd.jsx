@@ -52,12 +52,12 @@ const LogAdd = ({ techs, createLog }) => {
                         <hr />
                         <div className="row" style={{ marginBottom: 0 }}>
                             <div className="input-field col s12">
-                                <i className="material-icons prefix">account_circle</i>
+                                <i className="material-icons prefix">message</i>
                                 <input required ref={nameEl} type="text" className="validate" />
                                 <label htmlFor="icon_prefix">Log Title</label>
                             </div>
                             <div className="input-field col s12">
-                                <i className="material-icons prefix">account_circle</i>
+                                <i className="material-icons prefix">person_pin</i>
                                 <select ref={techEl} defaultValue="">
                                     <option value="" disabled>Choose your option</option>
                                     {
